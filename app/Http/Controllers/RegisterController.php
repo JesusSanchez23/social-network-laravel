@@ -11,37 +11,52 @@ class RegisterController extends Controller
 {
     //
 
-    public function index() {
+    public function index()
+    {
         return view('auth.register');
     }
 
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         // dd($request);
         // dd($request->get('name'));
 
         //Modificar el Request
         //para saltar la validación pero ya lo hace sin esto, por eso lo comento
         // $request->request->add(['username' =>Str::slug($request->username) ]);
-        
+
 
         // Validación
         $this->validate($request, [
-            'name'=> 'required|max:30',
-            'username'=>'required|unique:users|min:3|max:20',
-            'email'=>'required|unique:users|email|max:60',
-            'password'=> 'required|confirmed|min:6'
+            'name' => 'required|max:30',
+            'username' => 'required|unique:users|min:3|max:20',
+            'email' => 'required|unique:users|email|max:60',
+            'password' => 'required|confirmed|min:6'
         ]);
 
 
-       User::create([
-        'name' => $request->name,
-        'username' => Str::slug($request->username),
-        'email' => $request->email,
-        'password' =>Hash::make($request->password),
+        User::create([
+            'name' => $request->name,
+            'username' => Str::slug($request->username),
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
 
-       ]);
+        ]);
+        // autenticar un usuario
 
-    
+        // auth()->attempt([
+        //     'email'=> $request->email,
+        //     'password'=>$request->password
+        // ]);
+
+
+        // otra forma de autenticar
+
+        auth()->attempt($request->only('email', 'password'));
+
+        //    redireccionar
+
+        return redirect()->route('post.index');
     }
 }
