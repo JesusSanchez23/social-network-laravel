@@ -7,7 +7,11 @@ Registrate en Devstagram
 @section('contenido')
 <div class="md:flex md:justify-center md:gap-4 items-center">
     <div class="md:w-6/12 p-5">
-        <img src="{{asset('img/registrar.jpg')}}" alt="Imagen registro">
+
+        <div id="glitched-image">
+            <img src="{{asset('img/registrar.jpg')}}" alt="Imagen registro">
+        </div>
+
     </div>
 
     <div class="md:w-6/12 bg-white p-6 rounded-lg shadow-lg">

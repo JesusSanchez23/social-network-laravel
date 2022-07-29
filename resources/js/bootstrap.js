@@ -1,5 +1,32 @@
-import _ from 'lodash';
+import _ from "lodash";
 window._ = _;
+
+import { PowerGlitch } from "powerglitch";
+
+PowerGlitch.glitch("#glitched-image", {
+    imageUrl: "/public/img/registrar.jpg",
+    backgroundColor: "transparent",
+    timing: {
+        duration: 2 * 1000,
+        iterations: Infinity,
+    },
+    glitchTimeSpan: {
+        start: 0.5,
+        end: 0.7,
+    },
+    shake: {
+        velocity: 15,
+        amplitudeX: 0.4,
+        amplitudeY: 0.4,
+    },
+    slice: {
+        count: 6,
+        velocity: 15,
+        minHeight: 0.02,
+        maxHeight: 0.15,
+        hueRotate: true,
+    },
+});
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -7,10 +34,10 @@ window._ = _;
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-import axios from 'axios';
+import axios from "axios";
 window.axios = axios;
 
-window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
