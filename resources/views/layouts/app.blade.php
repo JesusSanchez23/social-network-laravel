@@ -6,12 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+
+    @stack('styles')
     <title>Devstagram - @yield('titulo')</title>
     {{-- <link rel="stylesheet" href="{{ asset('js/app.js') }}"> --}}
     <script src="{{ asset('js/app.js') }}"></script>
 
 
     @vite('resources/css/app.css')
+    @vite('resources/js/app.js')
     {{-- <script src="./path/to/your/powerglitch.min.js"></script> --}}
 
 
@@ -29,7 +32,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                           </svg>
                         Crear</a>
-                    <a href="#" class=" font-bold ">Hola: {{ auth()->user()->username }}</a>
+                    <a href="{{route('post.index', auth()->user()->username)}}" class=" font-bold ">Hola: {{ auth()->user()->username }}</a>
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
                         <button type="submit" href="{{ route('logout') }}"
@@ -46,7 +49,7 @@
         </div>
     </header>
 
-    <main class="container mt-10">
+    <main class="container mt-10 mx-auto">
         <h2 class="font-black mb-10 text-3xl text-center">
             @yield('titulo')
         </h2>
