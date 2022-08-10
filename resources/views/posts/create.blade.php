@@ -17,7 +17,7 @@
             </form>
         </div>
         <div class="md:w-1/2 px-10 bg-white p-3 rounded shadow-lg mt-10 md:mt-0">
-            <form action="{{ route('post.store') }}" method="POST">
+            <form action="{{ route('posts.store') }}" method="POST">
                 @csrf
                 <div class="mb-5">
                     <label for="titulo" class="uppercase mb-2 text-gray-500 font-bold">Titulo:</label>
