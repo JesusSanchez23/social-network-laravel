@@ -33,16 +33,42 @@
                 </div>
 
                 <p class="text-gray-800 text-sm mb-3 font-bold">
-                    0 <span class="font-normal">Seguidores</span>
+                    {{$user->followers->count()}} <span class="font-normal">@choice('seguidor|seguidores',$user->followers->count())</span>
                 </p>
 
                 <p class="text-gray-800 text-sm mb-3 font-bold">
-                    0 <span class="font-normal">Siguiendo</span>
+                    {{$user->followings->count()}} <span class="font-normal">Siguiendo</span>
                 </p>
 
                 <p class="text-gray-800 text-sm mb-3 font-bold">
-                    0 <span class="font-normal">Post</span>
+                    {{$user->posts->count()}} <span class="font-normal">Post</span>
                 </p>
+                @auth  
+                @if ($user->id !== auth()->user()->id) 
+                
+                @if ($user->siguiendo(auth()->user()))
+                <form action="{{route('users.unfollow', $user)}}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <input 
+                    type="submit"
+                    class="bg-red-600 text-white uppercase rounded px-3 py-1 text-xs font-bold cursor-pointer"
+                    value="Dejar de seguir"
+                    />
+                </form>
+                @else         
+                <form action="{{route('users.follow', $user)}}" method="POST">
+                    @csrf
+                    <input 
+                    type="submit"
+                    class="bg-blue-600 text-white uppercase rounded px-3 py-1 text-xs font-bold cursor-pointer"
+                    value="Seguir"
+                    />
+                </form>
+                @endif
+
+                @endif    
+                @endauth
             </div>
 
         </div>

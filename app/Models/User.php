@@ -7,6 +7,7 @@ use App\Models\Like;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -51,5 +52,21 @@ class User extends Authenticatable
 
     public function likes(){
         return $this->hasMany(Like::class);
+    }
+
+    //almacena los seguidores de un usuario
+    public function followers(){
+        return $this->BelongsToMany(User::class, 'followers', 'user_id', 'follower_id');
+    }
+
+    //comprobar si un usuario ya sigue a otro
+    public function siguiendo(User $user){
+        return $this->followers->contains($user->id);
+    }
+
+    //almacenar los que seguimos
+
+    public function followings(){
+        return $this->BelongsToMany(User::class, 'followers', 'follower_id', 'user_id');
     }
 }
