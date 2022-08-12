@@ -2,5 +2,10 @@
 
 
 @section('titulo')
-Principal
+    HomePage
+@endsection
+
+@section('contenido')
+ <x-listar-post :posts="$posts" />
+   
 @endsection

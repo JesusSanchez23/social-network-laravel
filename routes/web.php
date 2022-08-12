@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/home', HomeController::class)->name('home');
+Route::get('/', HomeController::class)->name('home');
 
 
 Route::get('/register', [RegisterController::class, 'index'])->name('register');
@@ -59,5 +59,7 @@ Route::delete('/posts/{post}/likes', [LikeController::class, 'destroy'])->name('
 
 Route::post('/{user:username}/follow', [FollowerController::class, 'store'])->name('users.follow');
 Route::delete('/{user:username}/unfollow', [FollowerController::class, 'destroy'])->name('users.unfollow');
+
+
 
 

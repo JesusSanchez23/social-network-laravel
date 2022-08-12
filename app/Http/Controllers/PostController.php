@@ -22,7 +22,7 @@ class PostController extends Controller
         // $posts = Post::where('user_id', $user->id)->get();
 
         // paginador
-        $posts = Post::where('user_id', $user->id)->paginate(10);
+        $posts = Post::where('user_id', $user->id)->latest()->paginate(10);
 
 
     
