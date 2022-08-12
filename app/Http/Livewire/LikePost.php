@@ -7,6 +7,14 @@ use Livewire\Component;
 class LikePost extends Component
 {
     public $post;
+    public $isLiked;
+    public $likes;
+
+    public function mount($post){
+        $this->isLiked = $post->checkLike(auth()->user());
+        $this->likes = $post->likes->count();
+        // dd($this->isLiked);
+    }
 
     public function render()
     {
@@ -14,6 +22,20 @@ class LikePost extends Component
     }
 
     public function like(){
-        return 'desde like';
+       
+
+        if ($this->post->checkLike(auth()->user())){
+            $this->post->likes()->where('post_id', $this->post->id)->delete();
+            $this->isLiked = false;
+            $this->likes--;
+        } else{
+            
+        $this->post->likes()->create([
+            'user_id' => auth()->user()->id
+        ]);
+        $this->isLiked = true;
+        $this->likes++;
+        }
+        
     }
 }
